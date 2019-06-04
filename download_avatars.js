@@ -1,3 +1,15 @@
+var args = process.argv;
+
+var owner = process.argv[2];
+var repo = process.argv[3];
+
+if (process.argv.length < 4) {
+    console.log("Provide an owner and repo name");
+    return ;
+}
+// console.log(owner, repo);
+
+
 var request = require('request');
 let tokenKey = require('./secrets.js');
 
@@ -34,7 +46,7 @@ function downloadImageByURL(url, filePath) {
   
 // *******************************************
 
-  getRepoContributors("jquery", "jquery", function(err, parsedBody) {
+getRepoContributors(owner, repo, function(err, parsedBody) {
 
     parsedBody.forEach(value => {
         let url = value.avatar_url;
@@ -46,7 +58,4 @@ function downloadImageByURL(url, filePath) {
     })
     // console.log("Errors:", err);
     // console.log("Result:", result);
-  });
-
-
-
+});
